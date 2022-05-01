@@ -4,8 +4,8 @@ from pyrogram import Client, idle
 app = Client("tgvc")
 # logging.basicConfig(level=logging.INFO)
 app.start()
-print('>>> USERBOT STARTED by @TamilBots')
+print('>>> USERBOTu başlatan @DejavuMusiciBot')
 idle()
 app.stop()
-print('\n>>> USERBOT STOPPED by @TamilBots')
+print('\n>>> USERBOT tarafından DURDURULDU @DejavuMusiciBot')
 
