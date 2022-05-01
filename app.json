@@ -1,8 +1,8 @@
 {
-  "name": "Voice Chat Music UserBot (Tamil Voice Userbot)",
-  "description": "Telegram UserBot to Play Audio in Telegram Voice Chats",
-  "repository": "https://github.com/TAMILBOTS/TAMILVCBOT",
-  "logo": "https://telegra.ph/file/6babc0f95a5362fd27872.jpg",
+  "name": " id Music UserBot (Dejavu Userbot)",
+  "description": "Telegram Sesli Sohbetlerde Ses Çalmak için Telegram UserBot",
+  "repository": "https://github.com/DegGixM/idUserMusicBot",
+  "logo": "https://te.legra.ph/file/be559ace3fe2b387dec9a.jpg",
   "keywords": [
     "tgvc-userbot",
     "telegram",
@@ -17,19 +17,19 @@
   ],
   "env": {
     "API_ID": {
-            "description": "api_id part of your Telegram API Key from my.telegram.org/apps",
+            "description": "my.telegram.org/apps adresinden Telegram API Anahtarınızın api_id kısmı",
             "required": true
     },
     "API_HASH": {
-            "description": "api_hash part of your Telegram API Key from my.telegram.org/apps",
+            "description": "my.telegram.org/apps adresinden Telegram API Anahtarınızın api_hash kısmı",
             "required": true
     },
     "SESSION_NAME": {
-            "description": "Session string, read the README",
+            "description": "Oturum dizesi, README'yi okuyun",
             "required": true
     },
     "PLUGIN": {
-            "description": "Voice Chat Smart Plugin to enable, must be one of: player/recorder/radio",
+            "description": "Etkinleştirilecek Sesli Sohbet Akıllı Eklentisi şunlardan biri olmalıdır: player/recorder/radio",
             "value": "player",
             "required": true
     }
