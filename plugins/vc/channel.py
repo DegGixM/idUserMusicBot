@@ -1,6 +1,6 @@
-""""Play and Control Audio playing in Telegram channels Voice Chat
+""""Telegram kanallarında Ses çalma Sesli Sohbeti Oynatın ve Kontrol Edin
 
-Dependencies:
+Bağımlılıklar:
 - ffmpeg
 """
 import asyncio
@@ -19,33 +19,33 @@ DELETE_DELAY = 8
 DURATION_AUTOPLAY_MIN = 10
 DURATION_PLAY_HOUR = 3
 
-USERBOT_HELP = f"""{emoji.LABEL}  **Common Commands**:
-__available to group members of current voice chat__
-__starts with / (slash) or ! (exclamation mark)__
-/play  reply with an audio to play/queue it, or show playlist
-/current  show current playing time of current track
-/repo  show github repository of the userbot
-`!help`  show help for commands
-{emoji.LABEL}  **Admin Commands**:
-__available to userbot account itself and its contacts__
-__starts with ! (exclamation mark)__
-✯ `!skip` skip current playing song,
-✯ `!join`  join voice chat of current group,
-✯ `!leave`  leave current voice chat,
-✯ `!vc`  check which VC is joined,
-✯ `!stop`  stop playing,
-✯ `!replay`  play from the beginning,
-✯ `!clean`  remove unused RAW PCM files,
-✯ `!pause` pause playing,
-✯ `!resume` resume playing,
-✯ `!mute`  mute the VC userbot,
-✯ `!unmute`  unmute the VC userbot.
-✯ provided by 🤖 **[TamilBots](https://t.me/TamilBots)**
-✯ For Support 🆘 **[TamilSupport](https://t.me/TamilSupport)**"""
+USERBOT_HELP = f"""{emoji.LABEL}  **Ortak Komutlar**:
+__geçerli sesli sohbetin grup üyeleri tarafından kullanılabilir__
+__ / (eğik çizgi) veya ! (ünlem işareti)__
+/play  sıraya almak veya çalma listesini göstermek için bir sesle yanıtlayın
+/current geçerli parçanın geçerli oynatma süresini göster
+/repo userbot'un github deposunu göster
+`!help` komutlar için yardım göster
+{emoji.LABEL} **Yönetici Komutları**:
+__userbot hesabının kendisine ve kişilerine uygun__
+__ile başlar ! (ünlem işareti)__
+✯ `!skip` çalmakta olan şarkıyı atla,
+✯ `!join` mevcut grubun sesli sohbetine katılın,
+✯ `!leave` mevcut sesli sohbetten çık,
+✯ `!vc` hangi VC'nin birleştirildiğini kontrol edin,
+✯ `!stop` oynamayı bırak,
+✯ `!replay` baştan oynat,
+✯ `!clean` kullanılmayan RAW PCM dosyalarını kaldırır,
+✯ `!pause` oynatmayı duraklatın,
+✯ `!resume` oynamaya devam edin,
+✯ `!mute` VC kullanıcı robotunu sessize alır,
+✯ `!unmute` VC kullanıcı robotunun sesini açar.
+✯ Tarafından Sağlanan 🤖 **[TamilBots](https://t.me/DejavuGurup)**
+✯ Destek Için 🆘 **[DejavuSupport](https://t.me/DejavuSupport)**"""
 
-USERBOT_REPO = f"""{emoji.ROBOT} Tamil Voice Chat UserBot
-» Repository: **[GitHub](https://github.com/tamilbots/tamilvcbot)**
-» Provided by **[TamilBots](https://t.me/TamilBots)**
+USERBOT_REPO = f"""{emoji.ROBOT} id UserBot
+» Depo: **[GitHub](https://github.com/DegGixM/idUserMusicBot)**
+» Tarafından sunulan **[DejavuSupport](https://t.me/DejavuSupport)**
 » License: AGPL-3.0-or-later"""
 
 
@@ -83,19 +83,19 @@ class MusicPlayer(object):
     async def send_playlist(self):
         playlist = self.playlist
         if not playlist:
-            pl = f"{emoji.NO_ENTRY} empty playlist"
+            pl = f"{emoji.NO_ENTRY} boş çalma listesi"
         else:
             if len(playlist) == 1:
-                pl = f"{emoji.REPEAT_SINGLE_BUTTON} **Playlist**:\n"
+                pl = f"{emoji.REPEAT_SINGLE_BUTTON} **Calma Listesi**:\n"
             else:
-                pl = f"{emoji.PLAY_BUTTON} **Playlist**:\n"
+                pl = f"{emoji.PLAY_BUTTON} **Calma Listesi**:\n"
             pl += "\n".join([
                 f"**{i}**. **[{x.audio.title}]({x.link})**"
                 for i, x in enumerate(playlist)
             ])
-        if mp.msg.get('playlist') is not None:
-            await mp.msg['playlist'].delete()
-        mp.msg['playlist'] = await mp.group_call.client.send_message("me", pl)
+        if mp.msg.get('Calma Listesi') is not None:
+            await mp.msg['Calma Listesi'].delete()
+        mp.msg['Calma Listesi'] = await mp.group_call.client.send_message("me", pl)
 
 
 mp = MusicPlayer()
@@ -110,13 +110,13 @@ async def network_status_changed_handler(gc: GroupCall, is_connected: bool):
         mp.chat_id = int("-100" + str(gc.full_chat.id))
         await mp.group_call.client.send_message(
             "me",
-            f"{emoji.CHECK_MARK_BUTTON} joined the voice chat"
+            f"{emoji.CHECK_MARK_BUTTON} Sesli Sohbete Katıldı"
         )
     else:
         mp.chat_id = None
         await mp.group_call.client.send_message(
             "me",
-            f"{emoji.CROSS_MARK_BUTTON} left the voice chat"
+            f"{emoji.CROSS_MARK_BUTTON} Sesli Sohbetten Ayrıldı"
         )
 
 
@@ -158,7 +158,7 @@ async def list_voice_chat(client, m: Message):
         chat_id = int("-100" + str(group_call.full_chat.id))
         chat = await client.get_chat(chat_id)
         await m.reply_text(
-            f"{emoji.MUSICAL_NOTES} **currently in the voice chat**:\n"
+            f"{emoji.MUSICAL_NOTES} **şu anda sesli sohbette**:\n"
             f"- **{chat.title}**",
             quote=True
         )
@@ -189,9 +189,9 @@ async def play_track(client, m: Message):
     if m.audio:
         if m.audio.duration > (DURATION_AUTOPLAY_MIN * 60):
             reply = await m.reply_text(
-                f"{emoji.ROBOT} audio which duration longer than "
-                f"{str(DURATION_AUTOPLAY_MIN)} min won't be automatically "
-                "added to playlist",
+                f"{emoji.ROBOT} süresinden daha uzun olan ses "
+                f"{str(DURATION_AUTOPLAY_MIN)} min otomatik olarak olmayacak "
+                 "oynatma listesine eklendi",
                 quote=True
             )
             await _delay_delete_messages((reply,), DELETE_DELAY)
@@ -201,8 +201,8 @@ async def play_track(client, m: Message):
         m_audio = m.reply_to_message
         if m_audio.audio.duration > (DURATION_PLAY_HOUR * 60 * 60):
             reply = await m.reply_text(
-                f"{emoji.ROBOT} audio which duration longer than "
-                f"{str(DURATION_PLAY_HOUR)} hours won't be added to playlist",
+                f"{emoji.ROBOT} süresinden daha uzun olan ses "
+                f"{str(DURATION_PLAY_HOUR)} saatler çalma listesine eklenmeyecek",
                 quote=True
             )
             await _delay_delete_messages((reply,), DELETE_DELAY)
@@ -214,14 +214,14 @@ async def play_track(client, m: Message):
     # check already added
     if playlist and playlist[-1].audio.file_unique_id \
             == m_audio.audio.file_unique_id:
-        reply = await m.reply_text(f"{emoji.ROBOT} already added", quote=True)
+        reply = await m.reply_text(f"{emoji.ROBOT} Çoktan eklenmiş", quote=True)
         await _delay_delete_messages((reply, m), DELETE_DELAY)
         return
     # add to playlist
     playlist.append(m_audio)
     if len(playlist) == 1:
         m_status = await m.reply_text(
-            f"{emoji.INBOX_TRAY} downloading and transcoding...",
+            f"{emoji.INBOX_TRAY} indirme ve kod dönüştürme...",
             quote=True
         )
         await download_audio(playlist[0])
@@ -232,7 +232,7 @@ async def play_track(client, m: Message):
         )
         await mp.update_start_time()
         await m_status.delete()
-        print(f"- START PLAYING: {playlist[0].audio.title}")
+        print(f"- OYUNA BAŞLA: {playlist[0].audio.title}")
     await mp.send_playlist()
     for track in playlist[:2]:
         await download_audio(track)
@@ -296,7 +296,7 @@ async def skip_track(_, m: Message):
             reply = await m.reply_text("\n".join(text), quote=True)
             await mp.send_playlist()
         except (ValueError, TypeError):
-            reply = await m.reply_text(f"{emoji.NO_ENTRY} invalid input",
+            reply = await m.reply_text(f"{emoji.NO_ENTRY} Geçersiz Giriş",
                                        quote=True,
                                        disable_web_page_preview=True)
         await _delay_delete_messages((reply, m), DELETE_DELAY)
@@ -326,7 +326,7 @@ async def restart_playing(_, m: Message):
     await mp.update_start_time()
     reply = await m.reply_text(
         f"{emoji.COUNTERCLOCKWISE_ARROWS_BUTTON}  "
-        "playing from the beginning...",
+        "baştan oynuyor...",
         quote=True
     )
     await _delay_delete_messages((reply, m), DELETE_DELAY)
@@ -434,7 +434,7 @@ async def skip_current_playing():
     await mp.update_start_time()
     # remove old track from playlist
     old_track = playlist.pop(0)
-    print(f"- START PLAYING: {playlist[0].audio.title}")
+    print(f"- OYUNA BAŞLA: {playlist[0].audio.title}")
     await mp.send_playlist()
     os.remove(os.path.join(
         download_dir,
