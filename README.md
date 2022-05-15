@@ -6,7 +6,7 @@ ABD numarası kullanmanız önerilir.(gerçek numaranız askıya alınırsa soru
 Riski size ait olmak üzere kullanın..
 
 <b> Heroku'ya Dağıtın </b>
-[![tamilbot logo](https://te.legra.ph/file/be559ace3fe2b387dec9a.jpg)](https://heroku.com/deploy?template=https://github.com/DegGixM/idUserMusicBot)
+[![id User Bot logo](https://te.legra.ph/file/be559ace3fe2b387dec9a.jpg)](https://heroku.com/deploy?template=https://github.com/DegGixM/idUserMusicBot)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DegGixM/idUserMusicBot)
 
 - Projeyi Heroku'ya dağıttıktan sonra çalışanı etkinleştirin
